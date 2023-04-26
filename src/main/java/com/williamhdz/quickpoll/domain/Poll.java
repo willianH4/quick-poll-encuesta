@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Poll {
@@ -20,11 +22,13 @@ public class Poll {
 	private Long id;
 	
 	@Column(name = "QUESTION")
+	@NotEmpty
 	private String question;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "POLL_ID")
 	@OrderBy
+	@Size(min=2, max = 6)
 	private Set<Option> options;
 
 	public Long getId() {

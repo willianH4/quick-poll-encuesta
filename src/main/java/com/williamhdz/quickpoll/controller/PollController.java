@@ -3,7 +3,8 @@ package com.williamhdz.quickpoll.controller;
 import java.net.URI;
 import java.util.Optional;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ import com.williamhdz.quickpoll.repository.PollRepository;
 public class PollController {
 
 	@Inject
-	private PollRepository pollRepository;
+	private PollRepository pollRepository; // DI with native
 	
 	// Get all polls
 	@GetMapping("/polls")
@@ -36,7 +37,7 @@ public class PollController {
 	
 	// Save one poll
 	@PostMapping("/polls")
-	public ResponseEntity<?> createPoll(@RequestBody Poll poll) {
+	public ResponseEntity<?> createPoll(@Valid @RequestBody Poll poll) {
 		poll = pollRepository.save(poll);
 		// forma 1: crea el registro sin retornar info
 		// return new ResponseEntity<>(null, HttpStatus.CREATED);

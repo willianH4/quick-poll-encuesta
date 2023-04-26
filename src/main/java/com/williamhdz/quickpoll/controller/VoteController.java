@@ -2,7 +2,7 @@ package com.williamhdz.quickpoll.controller;
 
 import java.net.URI;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
