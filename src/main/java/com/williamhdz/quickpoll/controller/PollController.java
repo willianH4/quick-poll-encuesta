@@ -22,7 +22,11 @@ import com.williamhdz.quickpoll.domain.Poll;
 import com.williamhdz.quickpoll.exception.ResourceNotFoundException;
 import com.williamhdz.quickpoll.repository.PollRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
+@Tag(name = "polls", description = "Poll API")
 public class PollController {
 
 	@Inject
@@ -30,6 +34,7 @@ public class PollController {
 	
 	// Get all polls
 	@GetMapping("/polls")
+	@Operation(summary = "Retrieves all the polls")
 	public ResponseEntity<Iterable<Poll>> getAllPolls() {
 		Iterable<Poll> allPolls = pollRepository.findAll();
 		return new ResponseEntity<>(pollRepository.findAll(), HttpStatus.OK);
@@ -37,6 +42,7 @@ public class PollController {
 	
 	// Save one poll
 	@PostMapping("/polls")
+	@Operation(summary = "Creates a new Poll", description = "The newly created poll Id will be sent in the location response header")
 	public ResponseEntity<?> createPoll(@Valid @RequestBody Poll poll) {
 		poll = pollRepository.save(poll);
 		// forma 1: crea el registro sin retornar info
@@ -57,12 +63,14 @@ public class PollController {
 	
 	// Get poll by ID
 	@GetMapping("/polls/{pollId}")
+	@Operation(summary = "Retrieves a Poll associated with the pollId")
 	public ResponseEntity<?> getPoll(@PathVariable Long pollId) {
 		return new ResponseEntity<>(verifyPoll(pollId), HttpStatus.OK);
 	}
 	
 	// update
 	@PutMapping("polls/{pollId}")
+	@Operation(summary = "Update a Poll exist")
 	public ResponseEntity<?> updatePoll(@RequestBody Poll poll, @PathVariable Long pollId) {
 		// save the entity
 		verifyPoll(pollId);
@@ -72,6 +80,7 @@ public class PollController {
 	
 	// delete one poll
 	@DeleteMapping("polls/{pollId}")
+	@Operation(summary = "Delete a Poll associated with the pollId")
 	public ResponseEntity<?> deletePoll(@PathVariable Long pollId) {
 		verifyPoll(pollId);
 		pollRepository.deleteById(pollId);
