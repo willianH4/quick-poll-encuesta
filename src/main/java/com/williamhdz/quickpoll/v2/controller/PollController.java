@@ -6,6 +6,8 @@ import java.util.Optional;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,9 +39,9 @@ public class PollController {
 	// Get all polls
 	@GetMapping("/polls")
 	@Operation(summary = "Retrieves all the polls")
-	public ResponseEntity<Iterable<Poll>> getAllPolls() {
-		Iterable<Poll> allPolls = pollRepository.findAll();
-		return new ResponseEntity<>(pollRepository.findAll(), HttpStatus.OK);
+	public ResponseEntity<Page<Poll>> getAllPolls(Pageable pageable) {
+		Page<Poll> allPolls = pollRepository.findAll(pageable);
+		return new ResponseEntity<>(allPolls, HttpStatus.OK);
 	}
 	
 	// Save one poll
