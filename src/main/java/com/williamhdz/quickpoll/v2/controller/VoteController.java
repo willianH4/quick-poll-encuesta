@@ -1,4 +1,4 @@
-package com.williamhdz.quickpoll.controller;
+package com.williamhdz.quickpoll.v2.controller;
 
 import java.net.URI;
 
@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.williamhdz.quickpoll.domain.Vote;
 import com.williamhdz.quickpoll.repository.VoteRepository;
 
-@RestController
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@RestController("voteControllerV2")
+@Tag(name = "votes", description = "Vote API")
+@RequestMapping("/v2")
 public class VoteController {
 	
 	@Inject
