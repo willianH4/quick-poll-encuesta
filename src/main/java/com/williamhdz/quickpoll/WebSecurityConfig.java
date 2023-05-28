@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+@Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 
@@ -33,10 +34,13 @@ public class WebSecurityConfig {
         @SuppressWarnings("deprecation")
 		UserDetails user =
                 User.withDefaultPasswordEncoder()
-                        .username("USERNAME")
-                        .password("PASSWORD")
+                        .username("user")
+                        .password("password")
                         .roles("ADMIN")
                         .build();
+        
+        System.out.println(user.getPassword());
+        System.out.println(user.getUsername());
 
         return new InMemoryUserDetailsManager(user);
     }

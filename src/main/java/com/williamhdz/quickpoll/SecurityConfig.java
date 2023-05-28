@@ -12,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import jakarta.inject.Inject;
 
-@Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig extends WebSecurityConfiguration {

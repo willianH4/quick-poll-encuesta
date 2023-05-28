@@ -6,5 +6,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.williamhdz.quickpoll.domain.Poll;
 
 public interface PollRepository extends CrudRepository<Poll, Long>, PagingAndSortingRepository<Poll, Long> {
-
+	// TODO: retomar el libro en la pagina 140
 }
